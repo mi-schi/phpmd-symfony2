@@ -13,7 +13,7 @@
             <![CDATA[
 When the class is a concrete implementation and ends with Controller, the method names have to end with Action.
 If not, it is an indication for business logic in your controller.
-So you have to outsource your business logic to services or subscribers.
+So you have to outsource your business logic to services or event-listeners.
             ]]>
         </description>
         <priority>3</priority>
@@ -34,13 +34,13 @@ class FooController
     </rule>
 
     <rule name="EntitySimpleGetterSetter"
-          message="The method should only be a simple {0} in this entity. The found tokens to allowed tokens are {1}/{2}."
+          message="The method should only be a simple {0} in this entity. The found allowed tokens are {1}/{2}."
           class="MS\PHPMD\Rule\Symfony2\EntitySimpleGetterSetter">
         <description>
             <![CDATA[
-If the class is an entity, it should contain only simple getter or setter.
+If the class is an entity, it should contains only simple getter or setter.
 Otherwise you have a data object and a business object in once. Swap out the methods with business logic to a model.
-Use a factory or a abstract MappedSuperclass for the model methods.
+Use a factory or an abstract MappedSuperclass for the model methods.
             ]]>
         </description>
         <priority>2</priority>
