@@ -29,6 +29,10 @@ class ControllerMethodName extends AbstractRule implements ClassAware
 
         /** @var MethodNode $method */
         foreach ($node->getMethods() as $method) {
+            if (false === $method->isPublic()) {
+                continue;
+            }
+            
             if ('Action' !== substr($method->getImage(), -6, 6)) {
                 $this->addViolation($method);
             }
