@@ -41,23 +41,32 @@ class ControllerMethodNameTest extends AbstractApplyTest
     public function testApplyWithDirtyController()
     {
         $className = 'TestController';
-        $validMethodName = 'testAction';
-        $notValidMethodName = 'doSomething';
+        $validPublicMethodName = 'testAction';
+        $notValidPublicMethodName = 'doSomething';
+        $validPrivateMethodName = 'createMyAwesomeForm';
 
-        $validMethodNode = \Mockery::mock('PHPMD\Node\MethodNode');
-        $validMethodNode->shouldReceive('getImage')->andReturn($validMethodName);
-        $validMethodNode->shouldReceive('getParentName')->andReturn($className);
-        $validMethodNode->shouldReceive('getName')->andReturn($validMethodName);
+        $validPublicMethodNode = \Mockery::mock('PHPMD\Node\MethodNode');
+        $validPublicMethodNode->shouldReceive('getImage')->andReturn($validPublicMethodName);
+        $validPublicMethodNode->shouldReceive('getParentName')->andReturn($className);
+        $validPublicMethodNode->shouldReceive('getName')->andReturn($validPublicMethodName);
+        $validPublicMethodNode->shouldReceive('isPublic')->andReturn(true);
 
-        $notValidMethodNode = \Mockery::mock('PHPMD\Node\MethodNode');
-        $notValidMethodNode->shouldReceive('getImage')->andReturn($notValidMethodName);
-        $notValidMethodNode->shouldReceive('getParentName')->andReturn($className);
-        $notValidMethodNode->shouldReceive('getName')->andReturn($notValidMethodName);
+        $notValidPublicMethodNode = \Mockery::mock('PHPMD\Node\MethodNode');
+        $notValidPublicMethodNode->shouldReceive('getImage')->andReturn($notValidPublicMethodName);
+        $notValidPublicMethodNode->shouldReceive('getParentName')->andReturn($className);
+        $notValidPublicMethodNode->shouldReceive('getName')->andReturn($notValidPublicMethodName);
+        $notValidPublicMethodNode->shouldReceive('isPublic')->andReturn(true);
+
+        $validPrivateMethodNode = \Mockery::mock('PHPMD\Node\MethodNode');
+        $validPrivateMethodNode->shouldReceive('getImage')->andReturn($validPrivateMethodName);
+        $validPrivateMethodNode->shouldReceive('getParentName')->andReturn($className);
+        $validPrivateMethodNode->shouldReceive('getName')->andReturn($validPrivateMethodName);
+        $validPrivateMethodNode->shouldReceive('isPublic')->andReturn(false);
 
         $classNode = \Mockery::mock('PHPMD\Node\ClassNode');
         $classNode->shouldReceive('isAbstract')->andReturn(false);
         $classNode->shouldReceive('getImage')->andReturn($className);
-        $classNode->shouldReceive('getMethods')->andReturn([$validMethodNode, $notValidMethodNode]);
+        $classNode->shouldReceive('getMethods')->andReturn([$validPublicMethodNode, $notValidPublicMethodNode, $validPrivateMethodNode]);
 
         $this->assertRule($classNode, 1);
     }
