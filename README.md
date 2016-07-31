@@ -1,3 +1,5 @@
+[![Use phpmd-extension instead.](http://www.repostatus.org/badges/latest/abandoned.svg)](https://github.com/mi-schi/phpmd-extension)
+
 # phpmd-symfony2
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
